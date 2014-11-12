@@ -35,5 +35,9 @@
   ],
   "ember-addon": {
     "configPath": "tests/dummy/config"
+  },
+  "dependencies": {
+    "ember-moment": "^1.0.0",
+    "ember-popup-menu": "^0.1.5"
   }
 }

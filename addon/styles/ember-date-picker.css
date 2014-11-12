@@ -1,0 +1,109 @@
+.date-picker .popup-menu {
+  padding: 20px;
+}
+
+.date-picker header {
+  height: 30px;
+  position: relative;
+}
+.date-picker .next-month,
+.date-picker .previous-month {
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  z-index: 100;
+}
+
+.date-picker .next-month {
+  right: 20px;
+}
+
+.date-picker .next-month:before {
+  content: '>';
+}
+
+.date-picker .icon-calendar:before {
+  content: 'Open';
+}
+
+.date-picker .previous-month {
+  left: 20px;
+}
+
+.date-picker .previous-month:before {
+  content: '<';
+}
+
+.calendar-month {
+  float: left;
+}
+
+.calendar-month:last-child {
+  margin-left: 30px;
+}
+
+.calendar-month .month {
+  text-align: center;
+}
+
+.calendar-month table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.calendar-month th {
+  height: 30px;
+  width: 30px;
+
+  border-bottom: 1px solid #999;
+  border-top: 3px solid #FFF;
+  margin-bottom: 5px;
+}
+
+.calendar-day {
+  cursor: pointer;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+}
+
+.calendar-day span {
+  position: relative;
+  display: block;
+  padding: 5px;
+  line-height: 20px;
+}
+
+.calendar-day.today span {
+  border: 1px solid #666;
+}
+
+.calendar-day.selected span {
+  border: 1px solid #FFF;
+}
+
+.calendar-day.in-range span:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  height: 1px;
+  width: 32px;
+  top: 15px;
+  left: -1px;
+  background: #FFF;
+}
+
+.calendar-day.disabled {
+  color: #999;
+  cursor: default;
+}
+
+.deduplicate-range-in-last-month .last-month .calendar-day.disabled.in-range span:before,
+.deduplicate-range-in-first-month .first-month .calendar-day.disabled.in-range span:before {
+  display: none;
+}
+
+.deduplicate-range-in-last-month .last-month .calendar-day.disabled span,
+.deduplicate-range-in-first-month .first-month .calendar-day.disabled span {
+  border: 0;
+}

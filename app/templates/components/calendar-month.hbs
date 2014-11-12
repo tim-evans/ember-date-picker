@@ -1,0 +1,21 @@
+<header>
+  <div class="month">{{moment month "MMMM YYYY"}}</div>
+</header>
+<table>
+  <thead>
+    <tr>
+      {{#each dayOfWeek in dayNames}}
+        <th>{{dayOfWeek}}</th>
+      {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each week in weeks}}
+      <tr>
+        {{#each day in week}}
+          {{calendar-day value=day month=month}}
+        {{/each}}
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

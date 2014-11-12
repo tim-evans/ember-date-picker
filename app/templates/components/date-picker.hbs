@@ -1,0 +1,9 @@
+{{input type=text value=displayValue}}<span class="icon-calendar" {{bind-attr id=icon}}></span>
+{{#popup-menu flow="dropdown" will-change="month" month=month}}
+  <a class="previous-month" {{action "previousMonth"}}></a>
+  <a class="next-month" {{action "nextMonth"}}></a>
+  {{calendar-month month=firstOfMonth minWeeks=minWeeks}}
+  {{#if multimonth}}
+    {{calendar-month month=nextMonth minWeeks=minWeeks}}
+  {{/if}}
+{{/popup-menu}}
