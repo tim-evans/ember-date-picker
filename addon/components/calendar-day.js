@@ -8,7 +8,7 @@ var reads = Ember.computed.reads;
 
 var isSameDay = function (a, b) {
   return a && b && moment(a).isSame(b, 'day');
-}
+};
 
 var CalendarDay = Ember.Component.extend({
   tagName: "td",

@@ -58,7 +58,8 @@ var DateRangePicker = DatePicker.extend({
     var icon = get(this, 'icon');
 
     popup.addTarget(icon, {
-      on: "click"
+      on: "click",
+      anchor: true
     });
 
     next(this,function () {

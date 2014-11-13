@@ -20,7 +20,7 @@ var weeksInMonth = function (moment) {
     weeks++;
   }
   return weeks;
-}
+};
 
 var DatePicker = Ember.Component.extend({
 
