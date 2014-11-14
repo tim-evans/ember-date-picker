@@ -1,6 +1,6 @@
 {
   "name": "ember-date-picker",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -38,6 +38,6 @@
   },
   "dependencies": {
     "ember-moment": "^1.0.0",
-    "ember-popup-menu": "^0.1.9"
+    "ember-popup-menu": "^0.1.11"
   }
 }

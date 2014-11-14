@@ -38,7 +38,7 @@
   float: left;
 }
 
-.calendar-month:last-child {
+.calendar-month.last-month {
   margin-left: 30px;
 }
 
@@ -75,10 +75,12 @@
 }
 
 .calendar-day.today span {
+  padding: 4px;
   border: 1px solid #666;
 }
 
 .calendar-day.selected span {
+  padding: 4px;
   border: 1px solid #FFF;
 }
 
@@ -92,6 +94,12 @@
   left: -1px;
   background: #FFF;
 }
+
+.calendar-day.today.in-range span:before {
+  left: -2px;
+  top: 14px;
+}
+
 
 .calendar-day.disabled {
   color: #999;

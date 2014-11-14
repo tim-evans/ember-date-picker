@@ -8,6 +8,8 @@ var generateGuid = Ember.generateGuid;
 var get = Ember.get;
 var set = Ember.set;
 
+var next = Ember.run.next;
+
 var reads = Ember.computed.reads;
 
 var weeksInMonth = function (moment) {
@@ -43,9 +45,24 @@ var DatePicker = Ember.Component.extend({
     var icon = get(this, 'icon');
 
     popup.addTarget(icon, {
-      on: "click"
+      on: "click",
+      anchor: true
+    });
+
+    next(this,function () {
+      popup.addTarget(get(this, 'input'), {
+        on: "focus hold"
+      });
     });
   }.on('didInsertElement'),
+
+  createChildView: function (childView, options) {
+    var view = this._super(childView, options);
+    if (Ember.TextField.detect(childView)) {
+      set(this, 'input', view);
+    }
+    return view;
+  },
 
   actions: {
     previousMonth: function () {

@@ -8,6 +8,7 @@ var get = Ember.get;
 var set = Ember.set;
 
 var next = Ember.run.next;
+var scheduleOnce = Ember.run.scheduleOnce;
 
 var alias = Ember.computed.alias;
 
@@ -22,13 +23,43 @@ var DateRangePicker = DatePicker.extend({
   rangeEnd: null,
 
   actions: {
-    selectDate: function (date) {
-      if (get(this, 'rangeStart')) {
-        set(this, 'rangeEnd', date);
+    selectDate: function (value) {
+      var target;
+      var focus;
+
+      if (get(this, 'start.focused')) {
+        target = 'rangeStart';
+      } else if (get(this, 'end.focused')) {
+        target = 'rangeEnd';
       } else {
-        set(this, 'rangeStart', date);
+        if (get(this, 'rangeStart')) {
+          target = 'rangeEnd';
+        } else {
+          target = 'rangeStart';
+        }
       }
-      get(this, 'popup').deactivate();
+
+      if (target === 'rangeStart') {
+        focus = 'start';
+        if (get(this, 'rangeEnd') == null) {
+          focus = 'end';
+        }
+      } else {
+        focus = 'end';
+        if (this._lastTarget === 'rangeStart' &&
+            get(this, 'rangeEnd') == null) {
+          focus = null;
+        }
+      }
+
+      set(this, target, value);
+
+      this._lastTarget = target;
+      if (focus != null) {
+        scheduleOnce('render', get(this, focus).$(), 'focus');
+      } else {
+        get(this, 'popup').deactivate();
+      }
     }
   },
 
@@ -61,10 +92,10 @@ var DateRangePicker = DatePicker.extend({
 
     next(this,function () {
       popup.addTarget(get(this, 'start'), {
-        on: "focus"
+        on: "focus hold"
       });
       popup.addTarget(get(this, 'end'), {
-        on: "focus"
+        on: "focus hold"
       });
     });
   }.on('didInsertElement'),
