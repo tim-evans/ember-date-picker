@@ -26,22 +26,51 @@ var CalendarDay = Ember.Component.extend({
   rangeStart: reads('dateRange.rangeStart'),
   rangeEnd: reads('dateRange.rangeEnd'),
 
+  isRangeStartVisibleInBothMonths: reads('dateRange.isRangeStartVisibleInBothMonths'),
+  isRangeEndVisibleInBothMonths: reads('dateRange.isRangeEndVisibleInBothMonths'),
+
   isToday: function () {
     return moment().isSame(get(this, 'value'), 'day');
   }.property('value'),
 
+  rangeStartInThisMonth: function () {
+    return get(this, 'month').isSame(get(this, 'rangeStart'), 'month');
+  }.property('rangeStart', 'month'),
+
+  rangeEndInThisMonth: function () {
+    return get(this, 'month').isSame(get(this, 'rangeEnd'), 'month');
+  }.property('rangeEnd', 'month'),
+
+  isRangeStartDisabled: function () {
+    return get(this, 'isRangeStartVisibleInBothMonths') && get(this, 'isDisabled') && !get(this, 'rangeStartInThisMonth');
+  }.property('isDisabled', 'isRangeStartVisibleInBothMonths', 'isRangeStartInThisMonth'),
+
+  isRangeStart: function () {
+    return isSameDay(get(this, 'value'), get(this, 'rangeStart')) &&
+           !get(this, 'isRangeStartDisabled');
+  }.property('value', 'rangeStart', 'isRangeStartDisabled'),
+
+  isRangeEndDisabled: function () {
+    return get(this, 'isRangeEndVisibleInBothMonths') && get(this, 'isDisabled') && !get(this, 'rangeEndInThisMonth');
+  }.property('isDisabled', 'isRangeEndVisibleInBothMonths', 'isRangeEndInThisMonth'),
+
+  isRangeEnd: function () {
+    return isSameDay(get(this, 'value'), get(this, 'rangeEnd')) &&
+           !get(this, 'isRangeEndDisabled');
+  }.property('value', 'rangeEnd', 'isRangeEndDisabled'),
+
   isSelected: function () {
-    var value = get(this, 'value');
-    return isSameDay(value, get(this, 'selection')) ||
-           isSameDay(value, get(this, 'rangeStart')) ||
-           isSameDay(value, get(this, 'rangeEnd'));
-  }.property('value', 'selection', 'rangeStart', 'rangeEnd'),
+    return isSameDay(get(this, 'value'), get(this, 'selection')) ||
+           get(this, 'isRangeStart') || get(this, 'isRangeEnd');
+  }.property('value', 'selection', 'isRangeStart', 'isRangeEnd'),
 
   isInRange: function () {
     var value = moment(get(this, 'value'));
     return value.isAfter(get(this, 'rangeStart'), 'day') &&
-           value.isBefore(get(this, 'rangeEnd'), 'day');
-  }.property('value', 'rangeStart', 'rangeEnd'),
+           value.isBefore(get(this, 'rangeEnd'), 'day') &&
+           !get(this, 'isRangeEndDisabled') && !get(this, 'isRangeStartDisabled');;
+  }.property('value', 'rangeStart', 'rangeEnd',
+             'isRangeEndDisabled', 'isRangeStartDisabled'),
 
   isDisabled: function () {
     return !moment(get(this, 'value')).isSame(get(this, 'month'), 'month');

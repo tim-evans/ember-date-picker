@@ -97,13 +97,3 @@
   color: #999;
   cursor: default;
 }
-
-.deduplicate-range-in-last-month .last-month .calendar-day.disabled.in-range span:before,
-.deduplicate-range-in-first-month .first-month .calendar-day.disabled.in-range span:before {
-  display: none;
-}
-
-.deduplicate-range-in-last-month .last-month .calendar-day.disabled span,
-.deduplicate-range-in-first-month .first-month .calendar-day.disabled span {
-  border: 0;
-}

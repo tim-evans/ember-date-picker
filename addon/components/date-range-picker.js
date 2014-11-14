@@ -13,9 +13,6 @@ var alias = Ember.computed.alias;
 
 var DateRangePicker = DatePicker.extend({
 
-  classNameBindings: ['isRangeStartVisibleInBothMonths:deduplicate-range-in-first-month',
-                      'isRangeEndVisibleInBothMonths:deduplicate-range-in-last-month'],
-
   multimonth: true,
 
   "range-start": alias("rangeStart"),
