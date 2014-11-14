@@ -68,7 +68,7 @@ var CalendarDay = Ember.Component.extend({
     var value = moment(get(this, 'value'));
     return value.isAfter(get(this, 'rangeStart'), 'day') &&
            value.isBefore(get(this, 'rangeEnd'), 'day') &&
-           !get(this, 'isRangeEndDisabled') && !get(this, 'isRangeStartDisabled');;
+           !get(this, 'isRangeEndDisabled') && !get(this, 'isRangeStartDisabled');
   }.property('value', 'rangeStart', 'rangeEnd',
              'isRangeEndDisabled', 'isRangeStartDisabled'),
 
