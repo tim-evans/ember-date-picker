@@ -49,7 +49,7 @@ var DatePicker = Ember.Component.extend({
       anchor: true
     });
 
-    next(this,function () {
+    next(this, function () {
       popup.addTarget(get(this, 'input'), {
         on: "focus hold"
       });

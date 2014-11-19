@@ -90,7 +90,7 @@ var DateRangePicker = DatePicker.extend({
       anchor: true
     });
 
-    next(this,function () {
+    next(this, function () {
       popup.addTarget(get(this, 'start'), {
         on: "focus hold"
       });
