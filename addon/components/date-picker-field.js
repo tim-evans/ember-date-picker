@@ -23,19 +23,22 @@ var DatePickerField = Ember.TextField.extend({
   },
 
   focusOut: function () {
-    this._timer = later(null, set, this, 'focused', false, 500);
+    var self = this;
+    this._timer = later(function () {
+      set(self, 'focused', false);
+    }, 500);
   },
 
   formattedDate: function () {
-    let value = get(this, 'date');
-    let format = get(this, 'format');
+    var value = get(this, 'date');
+    var format = get(this, 'format');
 
-    return value ? moment(value).format(get(this, format)) : null;
+    return value ? moment(value).format(format) : null;
   }.property('date', 'format'),
 
   value: function (key, value) {
     if (arguments.length > 1) {
-      let m = moment(value, [
+      var m = moment(value, [
         "MM-DD-YYYY",
         "YYYY-MM-DD",
         "YYYY MMM DD",
@@ -43,14 +46,9 @@ var DatePickerField = Ember.TextField.extend({
         "MMM DD, YYYY"
       ]);
 
-      let date = null;
+      var date = null;
       if (trim(value).length && m && m.isValid()) {
-        date = new Date(Date.UTC(m.year(), m.month(), m.date()));
-        set(this, key, value);
-        set(this, 'month', m.month());
-        set(this, 'year', m.year());
-      } else {
-        return value;
+        date = m.startOf('day').toDate();
       }
 
       this._displayValue$raw = value;
@@ -69,7 +67,7 @@ var DatePickerField = Ember.TextField.extend({
     }
 
     return value || get(this, 'formattedDate');
-  }.property('date')
+  }.property('formattedDate')
 
 });
 
