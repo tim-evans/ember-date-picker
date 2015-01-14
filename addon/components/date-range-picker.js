@@ -1,7 +1,6 @@
 import Ember from "ember";
 import DatePicker from "./date-picker";
 import nearestChild from "ember-popup-menu/computed/nearest-child";
-import date from "../computed/date";
 import visibleInBothMonths from "../computed/visible-in-both-months";
 
 var get = Ember.get;
@@ -99,9 +98,6 @@ var DateRangePicker = DatePicker.extend({
       });
     });
   }.on('didInsertElement'),
-
-  displayRangeStart: date('rangeStart', 'format'),
-  displayRangeEnd: date('rangeEnd', 'format'),
 
   isRangeStartVisibleInBothMonths: visibleInBothMonths('rangeStart'),
   isRangeEndVisibleInBothMonths: visibleInBothMonths('rangeEnd')

@@ -1,7 +1,6 @@
 import Ember from "ember";
 import moment from 'moment';
 import nearestChild from "ember-popup-menu/computed/nearest-child";
-import date from "../computed/date";
 
 var generateGuid = Ember.generateGuid;
 
@@ -114,9 +113,7 @@ var DatePicker = Ember.Component.extend({
     return get(this, 'value') ?
            get(this, 'value').getFullYear() :
            new Date().getFullYear();
-  }.property(),
-
-  displayValue: date('value', 'format')
+  }.property()
 });
 
 export default DatePicker;
