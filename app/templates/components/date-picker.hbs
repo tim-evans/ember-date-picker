@@ -1,4 +1,4 @@
-{{view "date-picker-field" value=displayValue}}<span class="icon-calendar" {{bind-attr id=icon}}></span>
+{{date-picker-field value=displayValue}}<span class="icon-calendar" {{bind-attr id=icon}}></span>
 {{#popup-menu flow="dropdown" will-change="month" month=month}}
   <a class="previous-month" {{action "previousMonth"}}></a>
   <a class="next-month" {{action "nextMonth"}}></a>
